@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit;
 }
 
-try {$connexion = new PDO('mysql:host=localhost;dbname=angular_ticketing_dw2', 'root', '8764DT|&sdhghURD-+!,:;UTDCU#_]=');
+try {$connexion = new PDO('mysql:host=localhost;dbname=angular_ticketing_dw2', 'test', '');
 }catch (PDOException $e) {
     die("Error: " . $e->getMessage());
 }
