@@ -1,0 +1,41 @@
+<div class="container">
+  <form
+    [formGroup]="formulaire"
+    (ngSubmit)="onSubmit()"
+    class="mt-4 formulaire"
+  >
+
+
+    <mat-form-field>
+        <mat-label>date_debut</mat-label>
+        <input
+          matInput
+          formControlName="date_debut"
+          type="date"
+          placeholder=""
+        />
+        <mat-error>Le champs est obligatoire</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>date_fin_reel</mat-label>
+        <input
+          matInput
+          formControlName="date_fin_reel"
+          type="date"
+          placeholder=""
+        />
+        <mat-error>Le champs est obligatoire</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>materiel</mat-label>
+        <mat-select formControlName="materiel">
+          @for (materiel of listeMateriel; track materiel) {
+          <mat-option [value]="materiel">{{ materiel.nom }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+    <button mat-raised-button color="primary">Ajouter reservation</button>
+  </form>
+</div>

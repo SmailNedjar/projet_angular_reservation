@@ -1,0 +1,93 @@
+<h1>Gestion des utilisateurs</h1>
+
+@if(authentification.role == "administrateur") {
+
+  <a mat-raised-button color="primary" routerLink="/add-reservation"
+    >Ajouter une nouvelle reservation</a
+  >
+}
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="listeReservation">
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let reservation">{{ reservation.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef>Prénom</th>
+      <td mat-cell *matCellDef="let reservation">
+        {{ reservation.firstname }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let reservation">{{ reservation.lastname }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Role</th>
+      <td mat-cell *matCellDef="let reservation">{{ reservation.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef>Materiel</th>
+      <td mat-cell *matCellDef="let reservation">{{ reservation.nom }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date_debut">
+        <th mat-header-cell *matHeaderCellDef>date debut</th>
+        <td mat-cell *matCellDef="let reservation">{{ reservation.date_debut }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="date_fin_reel">
+        <th mat-header-cell *matHeaderCellDef>date fin</th>
+        <td mat-cell *matCellDef="let reservation">{{ reservation.date_fin_reel }}</td>
+      </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let reservation">
+        @if(authentification.role == "administrateur") {
+
+        <button
+          mat-mini-fab
+          color="accent"
+          [routerLink]="['/edit-reservation', reservation.id,]"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+          mat-mini-fab
+          class="ms-3"
+          color="warn"
+          (click)="onSuppressionUtilisateur(reservation.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        }
+      </td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="['email', 'firstname', 'lastname', 'role', 'nom', 'date_debut', 'date_fin_reel','actions']"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: ['email', 'firstname', 'lastname', 'role', 'nom', 'date_debut', 'date_fin_reel','actions']
+      "
+    ></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>
